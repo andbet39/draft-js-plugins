@@ -6,6 +6,7 @@ import getSearchText from '../utils/getSearchText';
 import decodeOffsetKey from '../utils/decodeOffsetKey';
 import { genKey } from 'draft-js';
 import { List } from 'immutable';
+import {Immutable ,fromJS} from 'immutable';
 
 export default class MentionSearch extends Component {
 
@@ -142,13 +143,30 @@ export default class MentionSearch extends Component {
     const selection = this.props.getEditorState().getSelection();
     const { word } = getSearchText(this.props.getEditorState(), selection);
     const mentionValue = word.substring(1, word.length).toLowerCase();
-    const mentions = this.props.mentions ? this.props.mentions : List([]);
+    let mentions = List([]);
+
+    if( this.props.mentions.fetchUrl){
+
+          var request = new XMLHttpRequest();
+            request.open('GET', this.props.mentions.fetchUrl, false);  // `false` makes the request synchronous
+            request.send(null);
+            if (request.status === 200) {
+              const js  = JSON.parse(request.responseText);
+              mentions =  fromJS(js);
+            }
+    }else{
+             mentions = this.props.mentions ? this.props.mentions : List([]);
+    }
+ 
+
     const filteredValues = mentions.filter((mention) => (
       !mentionValue || mention.get('name').toLowerCase().indexOf(mentionValue) > -1
     ));
     const size = filteredValues.size < 5 ? filteredValues.size : 5;
     return filteredValues.setSize(size);
   };
+
+
 
   commitSelection = () => {
     this.onMentionSelect(this.filteredMentions.get(this.state.focusedOptionIndex));

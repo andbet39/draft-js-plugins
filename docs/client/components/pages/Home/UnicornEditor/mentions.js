@@ -5,7 +5,19 @@
 // TODO use unicorns for the unicorn editor
 
 import { fromJS } from 'immutable';
+/*
+const metions = ()=>{
+ const met  = fromJS([
+      {
+        name: 'Matthew Russell',
+        link: 'https://twitter.com/mrussell247',
+        avatar: 'https://pbs.twimg.com/profile_images/517863945/mattsailing_400x400.jpg',
+      }
+    ]);
 
+    return met;
+}
+/*
 const mentions = fromJS([
   {
     name: 'Matthew Russell',
@@ -38,6 +50,10 @@ const mentions = fromJS([
     avatar: 'https://pbs.twimg.com/profile_images/688487813025640448/E6O6I011_400x400.png',
   },
 ]);
+*/
+
+const mentions = {'fetchUrl':'https://crackling-inferno-4390.firebaseio.com/mention.json'}
+
 
 // const mentions = fromJS([
 //   { name: 'Matthew Russell', link: 'https://twitter.com/mrussell247' },
