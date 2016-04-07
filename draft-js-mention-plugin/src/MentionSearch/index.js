@@ -145,19 +145,21 @@ export default class MentionSearch extends Component {
     const mentionValue = word.substring(1, word.length).toLowerCase();
     let mentions = List([]);
 
-    if( this.props.mentions.fetchUrl){
-
-          var request = new XMLHttpRequest();
-            request.open('GET', this.props.mentions.fetchUrl, false);  // `false` makes the request synchronous
-            request.send(null);
-            if (request.status === 200) {
-              const js  = JSON.parse(request.responseText);
-              mentions =  fromJS(js);
-            }
+    if(this.props.mentions.fetchFn){
+      mentions = this.props.mentions.fetchFn(mentionValue);
     }else{
-             mentions = this.props.mentions ? this.props.mentions : List([]);
+      if( this.props.mentions.fetchUrl){
+            var request = new XMLHttpRequest();
+              request.open('GET', this.props.mentions.fetchUrl, false);  // `false` makes the request synchronous
+              request.send(null);
+              if (request.status === 200) {
+                const js  = JSON.parse(request.responseText);
+                mentions =  fromJS(js);
+              }
+      }else{
+               mentions = this.props.mentions ? this.props.mentions : List([]);
+      }
     }
- 
 
     const filteredValues = mentions.filter((mention) => (
       !mentionValue || mention.get('name').toLowerCase().indexOf(mentionValue) > -1

@@ -4,11 +4,14 @@ import createHashtagPlugin from 'draft-js-hashtag-plugin';
 import editorStyles from './editorStyles.css';
 import colorStyleMap from './colorStyleMap';
 import ColorControls from './ColorControls';
+
+
 import {
   EditorState,
   Modifier,
   RichUtils,
 } from 'draft-js';
+
 import * as colorPlugin from './colorPlugin';
 
 const hashtagPlugin = createHashtagPlugin();
@@ -17,6 +20,7 @@ const text = `#TIL: This editor can have all sorts of #hashtags. Pretty #cool :)
 Try it yourself by starting a word with a # (hash character) …
 `;
 
+ 
 export default class SimpleHashtagEditor extends Component {
 
   state = {
@@ -82,6 +86,8 @@ export default class SimpleHashtagEditor extends Component {
           editorState={this.state.editorState}
           onToggle={this.toggleColor}
         />
+
+      <MentionSearch callbacks={ callbacks }></MentionSearch>
       </div>
     );
   }

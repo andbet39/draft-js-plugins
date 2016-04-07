@@ -13,6 +13,7 @@ module.exports = {
       'draft-js-undo-plugin': path.join(__dirname, '..', 'draft-js-undo-plugin', 'src'),
       'draft-js-emoji-plugin': path.join(__dirname, '..', 'draft-js-emoji-plugin', 'src'),
       'draft-js-dnd-plugin': path.join(__dirname, '..', 'draft-js-dnd-plugin', 'src'),
+      'MentionSearch': path.join(__dirname, '..', 'draft-js-mention-plugin/src', 'MentionSearch'),
       react: path.join(__dirname, 'node_modules', 'react'),
     },
     extensions: ['', '.js'],
